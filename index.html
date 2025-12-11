@@ -4,11 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RobloSecurity Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        #output {
+            margin-top: 20px;
+            padding: 15px;
+            width: 90%;
+            max-width: 600px;
+            word-break: break-all;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <h1>RobloSecurity Generator</h1>
     <button id="generateBtn">Genereer RobloSecurity code</button>
-    <p id="output"></p>
+    <p id="output">Hier verschijnt je code...</p>
+    <button id="copyBtn">Kopieer naar klembord</button>
 
     <script src="script.js"></script>
 </body>
