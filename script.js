@@ -5,12 +5,11 @@ const TEMPLATE = "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone
 const TOKEN_MIN_LENGTH = 550;
 const TOKEN_MAX_LENGTH = 650;
 
-// Mogelijke tekens voor het token
-const CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._|:";
+// Mogelijke tekens voor het token (veilig voor JavaScript string)
+const CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._";
 
 // Genereer een random token
-function generateRandomToken() {
-    const length = Math.floor(Math.random() * (TOKEN_MAX_LENGTH - TOKEN_MIN_LENGTH + 1)) + TOKEN_MIN_LENGTH;
+function generateRandomToken(length) {
     let token = "";
     for (let i = 0; i < length; i++) {
         const randomIndex = Math.floor(Math.random() * CHARACTERS.length);
@@ -24,7 +23,11 @@ function generateRandomRobloSecurityForAccount() {
     const accounts = ["user1", "user2", "user3", "user4", "user5"];
     const randomAccountIndex = Math.floor(Math.random() * accounts.length);
     const randomAccount = accounts[randomAccountIndex];
-    const robloSecurity = TEMPLATE + generateRandomToken();
+
+    // Bepaal lengte van het token, exclusief TEMPLATE
+    const tokenLength = Math.floor(Math.random() * (TOKEN_MAX_LENGTH - TOKEN_MIN_LENGTH + 1)) + TOKEN_MIN_LENGTH;
+
+    const robloSecurity = TEMPLATE + generateRandomToken(tokenLength);
     return `RobloSecurity: ${robloSecurity}\nAccount: ${randomAccount}`;
 }
 
@@ -38,5 +41,7 @@ document.getElementById("copyBtn").addEventListener("click", () => {
     const text = document.getElementById("output").textContent;
     navigator.clipboard.writeText(text).then(() => {
         alert("Code gekopieerd naar klembord!");
+    }).catch(() => {
+        alert("Kon niet kopiëren naar klembord.");
     });
 });
