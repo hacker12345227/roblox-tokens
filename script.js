@@ -1,42 +1,35 @@
-/**
+// Lengte van de code zoals jouw voorbeeld (~550+ tekens)
+const CODE_LENGTH = 600;
 
-
-Generates a random RobloSecurity code.
- *
-
-
-@returns {string} Random RobloSecurity code.
- */
+// Genereer een lange RobloSecurity code
 function generateRandomRobloSecurity() {
-    const characters = “ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789”;
-    const codeLength = 10;
-    let robloSecurity = “”;
-for (let i = 0; i < codeLength; i++) {
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    robloSecurity += characters.charAt(randomIndex);
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._|:";
+    let robloSecurity = "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_";
+    while (robloSecurity.length < CODE_LENGTH) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        robloSecurity += characters.charAt(randomIndex);
+    }
+    return robloSecurity;
 }
-return robloSecurity;
-}
 
-
-/**
-
-
-Generates a random RobloSecurity code and assigns it to a random account.
- *
-
-
-@returns {string} Random RobloSecurity code and the account it is assigned to.
- */
+// Genereer code voor een random account
 function generateRandomRobloSecurityForAccount() {
-    const accounts = [“user1”, “user2”, “user3”, “user4”, “user5”];
+    const accounts = ["user1", "user2", "user3", "user4", "user5"];
     const randomAccountIndex = Math.floor(Math.random() * accounts.length);
     const randomAccount = accounts[randomAccountIndex];
     const robloSecurity = generateRandomRobloSecurity();
-return RobloSecurity: ${robloSecurity}, Account: ${randomAccount};
+    return `RobloSecurity: ${robloSecurity}\nAccount: ${randomAccount}`;
 }
 
+// Button click events
+document.getElementById("generateBtn").addEventListener("click", () => {
+    const result = generateRandomRobloSecurityForAccount();
+    document.getElementById("output").textContent = result;
+});
 
-// Usage Example for generateRandomRobloSecurityForAccount
-const randomRobloSecurityForAccount = generateRandomRobloSecurityForAccount();
-console.log(randomRobloSecurityForAccount);
+document.getElementById("copyBtn").addEventListener("click", () => {
+    const text = document.getElementById("output").textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        alert("Code gekopieerd naar klembord!");
+    });
+});
