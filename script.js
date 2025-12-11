@@ -18,24 +18,15 @@ function generateRandomToken(length) {
     return token;
 }
 
-// Functie om een volledige RobloSecurity code voor een account te genereren
-function generateRandomRobloSecurityForAccount() {
-    const accounts = ["user1", "user2", "user3", "user4", "user5"];
-    const randomAccountIndex = Math.floor(Math.random() * accounts.length);
-    const randomAccount = accounts[randomAccountIndex];
-
-    // Bepaal de tokenlengte exclusief TEMPLATE
+// Genereer volledige RobloSecurity code
+function generateRandomRobloSecurity() {
     const tokenLength = Math.floor(Math.random() * (TOKEN_MAX_LENGTH - TOKEN_MIN_LENGTH + 1)) + TOKEN_MIN_LENGTH;
-
-    // Combineer template + token
-    const robloSecurity = TEMPLATE + generateRandomToken(tokenLength);
-
-    return `RobloSecurity: ${robloSecurity}\nAccount: ${randomAccount}`;
+    return TEMPLATE + generateRandomToken(tokenLength);
 }
 
 // Button events
 document.getElementById("generateBtn").addEventListener("click", () => {
-    const result = generateRandomRobloSecurityForAccount();
+    const result = generateRandomRobloSecurity();
     document.getElementById("output").textContent = result;
 });
 
