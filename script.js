@@ -1,14 +1,14 @@
-// Template waarschuwingsbericht
+// Template waarschuwing
 const TEMPLATE = "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_";
 
-// Token lengte (ongeveer zoals voorbeeld ±50 tekens)
+// Token lengte (exclusief template)
 const TOKEN_MIN_LENGTH = 550;
 const TOKEN_MAX_LENGTH = 650;
 
-// Mogelijke tekens voor het token (veilig voor JavaScript string)
+// Veilige karakters voor token
 const CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._";
 
-// Genereer een random token
+// Functie om een random token te genereren
 function generateRandomToken(length) {
     let token = "";
     for (let i = 0; i < length; i++) {
@@ -18,16 +18,18 @@ function generateRandomToken(length) {
     return token;
 }
 
-// Genereer RobloSecurity code voor een random account
+// Functie om een volledige RobloSecurity code voor een account te genereren
 function generateRandomRobloSecurityForAccount() {
     const accounts = ["user1", "user2", "user3", "user4", "user5"];
     const randomAccountIndex = Math.floor(Math.random() * accounts.length);
     const randomAccount = accounts[randomAccountIndex];
 
-    // Bepaal lengte van het token, exclusief TEMPLATE
+    // Bepaal de tokenlengte exclusief TEMPLATE
     const tokenLength = Math.floor(Math.random() * (TOKEN_MAX_LENGTH - TOKEN_MIN_LENGTH + 1)) + TOKEN_MIN_LENGTH;
 
+    // Combineer template + token
     const robloSecurity = TEMPLATE + generateRandomToken(tokenLength);
+
     return `RobloSecurity: ${robloSecurity}\nAccount: ${randomAccount}`;
 }
 
