@@ -1,27 +1,34 @@
-// Lengte van de code zoals jouw voorbeeld (~550+ tekens)
-const CODE_LENGTH = 600;
+// Template waarschuwingsbericht
+const TEMPLATE = "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_";
 
-// Genereer een lange RobloSecurity code
-function generateRandomRobloSecurity() {
-    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._|:";
-    let robloSecurity = "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_";
-    while (robloSecurity.length < CODE_LENGTH) {
-        const randomIndex = Math.floor(Math.random() * characters.length);
-        robloSecurity += characters.charAt(randomIndex);
+// Token lengte (ongeveer zoals voorbeeld ±50 tekens)
+const TOKEN_MIN_LENGTH = 550;
+const TOKEN_MAX_LENGTH = 650;
+
+// Mogelijke tekens voor het token
+const CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._|:";
+
+// Genereer een random token
+function generateRandomToken() {
+    const length = Math.floor(Math.random() * (TOKEN_MAX_LENGTH - TOKEN_MIN_LENGTH + 1)) + TOKEN_MIN_LENGTH;
+    let token = "";
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * CHARACTERS.length);
+        token += CHARACTERS[randomIndex];
     }
-    return robloSecurity;
+    return token;
 }
 
-// Genereer code voor een random account
+// Genereer RobloSecurity code voor een random account
 function generateRandomRobloSecurityForAccount() {
     const accounts = ["user1", "user2", "user3", "user4", "user5"];
     const randomAccountIndex = Math.floor(Math.random() * accounts.length);
     const randomAccount = accounts[randomAccountIndex];
-    const robloSecurity = generateRandomRobloSecurity();
+    const robloSecurity = TEMPLATE + generateRandomToken();
     return `RobloSecurity: ${robloSecurity}\nAccount: ${randomAccount}`;
 }
 
-// Button click events
+// Button events
 document.getElementById("generateBtn").addEventListener("click", () => {
     const result = generateRandomRobloSecurityForAccount();
     document.getElementById("output").textContent = result;
